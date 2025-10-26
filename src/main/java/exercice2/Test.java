@@ -1,9 +1,13 @@
 package exercice2;
 
+import exercice2.dao.EtudiantDao;
+import exercice2.dao.OptionDao;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Test {
 
@@ -43,17 +47,27 @@ public class Test {
 
     static void main() {
         // Test d’insertion d’options
-        Option opt1 = new Option(1, "Info");
-        Option opt2 = new Option(2, "Télécommunications");
+//        Option opt1 = new Option(1, "Info");
+//        Option opt2 = new Option(2, "Télécommunications");
+//
+//        enregistrerOption(opt1);
+//        enregistrerOption(opt2);
+//
+//        // Test d’insertion d’étudiants (avec l’ID d’option correspondant)
+//        Etudiant etd1 = new Etudiant("Salihi", "Yassine", 1);
+//        Etudiant etd2 = new Etudiant("Ait Hmad", "Soufiane", 2);
+//
+//        enregistrerEtudiant(etd1);
+//        enregistrerEtudiant(etd2);
+        // ========================================== DAO ==========================================
+        OptionDao optionDao = new OptionDao();
+        optionDao.insert(new Option(1, "Info"));
 
-        enregistrerOption(opt1);
-        enregistrerOption(opt2);
+        EtudiantDao etudiantDao = new EtudiantDao();
+        etudiantDao.insert(new Etudiant("Nom", "Prenom", 1));
 
-        // Test d’insertion d’étudiants (avec l’ID d’option correspondant)
-        Etudiant etd1 = new Etudiant("Salihi", "Yassine", 1);
-        Etudiant etd2 = new Etudiant("Ait Hmad", "Soufiane", 2);
+        List<Option> options = optionDao.findAll();
+        List<Etudiant> etudiants = etudiantDao.findAll();
 
-        enregistrerEtudiant(etd1);
-        enregistrerEtudiant(etd2);
     }
 }
